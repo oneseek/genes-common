@@ -4,14 +4,14 @@ setup(
     name="genes-common",
     version="1.0.0",
     description="Common modules for genes project",
-    author="Your Name",
-    author_email="your.email@example.com",
+    author="Fangzhen Fu",
+    author_email="fangzhenfutao@gmail.com",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     python_requires=">=3.8",
     install_requires=[
-        "pymongo>=4.0.0",
-        "python-dotenv>=0.19.0",
+        "pymongo>=4.6.1",
+        "python-dotenv>=1.0.1",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
