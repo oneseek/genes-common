@@ -10,7 +10,12 @@ Common shared modules for the genes project including:
 __version__ = "1.0.0"
 
 from .config import Settings, settings
-from .db import get_mongo_client, get_mongo_db
+from .db import (
+    get_mongo_client, get_mongo_db, 
+    get_redis_client, 
+    get_mysql_engine, get_mysql_session, get_mysql_connection,
+    close_connections
+)
 from .logging import setup_logging
 
 __all__ = [
@@ -18,5 +23,10 @@ __all__ = [
     "settings", 
     "get_mongo_client",
     "get_mongo_db",
+    "get_redis_client",
+    "get_mysql_engine",
+    "get_mysql_session", 
+    "get_mysql_connection",
+    "close_connections",
     "setup_logging",
 ] 

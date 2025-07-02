@@ -12,6 +12,9 @@ setup(
     install_requires=[
         "pymongo>=4.6.1",
         "python-dotenv>=1.0.1",
+        "redis>=5.0.1",
+        "pymysql>=1.1.0",
+        "sqlalchemy>=2.0.0",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",

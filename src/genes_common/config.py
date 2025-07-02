@@ -76,8 +76,15 @@ class SecurityConfig:
     
     # JWT settings
     jwt_secret_key: str = field(default_factory=lambda: os.getenv("JWT_SECRET_KEY", "your-jwt-secret-key-here"))
+    jwt_algorithm: str = field(default_factory=lambda: os.getenv("JWT_ALGORITHM", "HS256"))
     jwt_access_token_expires: timedelta = field(default_factory=lambda: timedelta(days=1))
+    jwt_access_token_expire_minutes: int = field(default_factory=lambda: int(os.getenv("JWT_ACCESS_TOKEN_EXPIRE_MINUTES", "30")))
     jwt_refresh_token_expires: timedelta = field(default_factory=lambda: timedelta(days=30))
+    
+    # Admin user settings (for dashboard)
+    admin_username: str = field(default_factory=lambda: os.getenv("ADMIN_USERNAME", "admin"))
+    admin_password: str = field(default_factory=lambda: os.getenv("ADMIN_PASSWORD", "admin123"))
+    admin_email: str = field(default_factory=lambda: os.getenv("ADMIN_EMAIL", "admin@oneseek.com"))
 
 
 @dataclass
@@ -142,8 +149,9 @@ class SecurityConfigValidator(ConfigValidator):
         # 在生产环境中严格验证API token
         from os import getenv
         environment = getenv("ENVIRONMENT", "development")
+        require_api_token = getenv("REQUIRE_API_TOKEN", "true").lower() == "true"
         
-        if environment == "production":
+        if environment == "production" and require_api_token:
             if not config.api_token or config.api_token == "your-api-token-here":
                 raise ValueError("API token must be set and not use default value in production")
         
@@ -349,6 +357,31 @@ class Settings:
     @property
     def APP_NAME(self) -> str:
         return self.app.app_name
+    
+    # 认证配置向后兼容
+    @property
+    def ADMIN_USERNAME(self) -> str:
+        return self.security.admin_username
+    
+    @property
+    def ADMIN_EMAIL(self) -> str:
+        return self.security.admin_email
+    
+    @property
+    def ADMIN_PASSWORD(self) -> str:
+        return self.security.admin_password
+    
+    @property
+    def JWT_SECRET_KEY(self) -> str:
+        return self.security.jwt_secret_key
+    
+    @property
+    def JWT_ALGORITHM(self) -> str:
+        return self.security.jwt_algorithm
+    
+    @property
+    def JWT_ACCESS_TOKEN_EXPIRE_MINUTES(self) -> int:
+        return self.security.jwt_access_token_expire_minutes
 
 
 # 全局设置实例
