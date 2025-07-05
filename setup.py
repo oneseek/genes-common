@@ -10,7 +10,7 @@ setup(
     package_dir={"": "src"},
     python_requires=">=3.8",
     install_requires=[
-        "pymongo>=4.6.1",
+        "pymongo==4.13.2",
         "python-dotenv>=1.0.1",
         "redis>=5.0.1",
         "pymysql>=1.1.0",

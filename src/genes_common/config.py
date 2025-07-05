@@ -382,6 +382,15 @@ class Settings:
     @property
     def JWT_ACCESS_TOKEN_EXPIRE_MINUTES(self) -> int:
         return self.security.jwt_access_token_expire_minutes
+    
+    # 主机和端口配置向后兼容
+    @property
+    def HOST(self) -> str:
+        return self.app.host
+    
+    @property  
+    def PORT(self) -> int:
+        return self.app.port
 
 
 # 全局设置实例
