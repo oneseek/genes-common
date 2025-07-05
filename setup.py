@@ -15,6 +15,7 @@ setup(
         "redis>=5.0.1",
         "pymysql>=1.1.0",
         "sqlalchemy>=2.0.0",
+        "oss2==2.17.0",  # Aliyun OSS SDK
     ],
     classifiers=[
         "Development Status :: 4 - Beta",

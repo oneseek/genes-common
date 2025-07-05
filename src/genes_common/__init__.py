@@ -17,6 +17,7 @@ from .db import (
     close_connections
 )
 from .logging import setup_logging
+from .aliyun_oss import OSSClient
 
 __all__ = [
     "Settings",
@@ -29,4 +30,5 @@ __all__ = [
     "get_mysql_connection",
     "close_connections",
     "setup_logging",
+    "OSSClient",
 ] 
